@@ -1,0 +1,24 @@
+﻿{
+  "profiles": {
+    "dev": {
+      "commandName": "Project",
+      "applicationUrl": "https://localhost:5000",
+      "launchUrl": "swagger",
+      "launchBrowser": true,
+      "dotnetRunMessages": "true",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+
+    "prod": {
+      "commandName": "Project",
+      "applicationUrl": "https://localhost:5000",
+      "launchUrl": "swagger",
+      "dotnetRunMessages": "true",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Production"
+      }
+    }
+  }
+}
