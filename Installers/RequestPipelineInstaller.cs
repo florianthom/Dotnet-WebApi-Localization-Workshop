@@ -20,6 +20,15 @@ public static class RequestPipelineInstaller
         app.UseHttpsRedirection();
 
         var options = app.Services.GetService<IOptions<RequestLocalizationOptions>>()!;
+
+        // var supportedCultures = new[] { "en-US", "fr-FR" };
+        // var localizationOptions = new RequestLocalizationOptions()
+        //     .SetDefaultCulture(supportedCultures[0])
+        //     .AddSupportedCultures(supportedCultures)
+        //     .AddSupportedUICultures(supportedCultures);
+
+        // app.UseRequestLocalization(localizationOptions);
+
         app.UseRequestLocalization(options.Value);
 
         app.UseAuthentication();

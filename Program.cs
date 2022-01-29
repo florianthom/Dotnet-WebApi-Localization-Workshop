@@ -4,6 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.InstallMvc();
 builder.Services.InstallSwagger();
+builder.Services.InstallLocalization();
 
 var app = builder.Build();
 

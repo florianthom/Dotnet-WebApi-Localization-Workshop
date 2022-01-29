@@ -1,4 +1,5 @@
 using System.Globalization;
+using hello_asp_localization.Domain;
 using Microsoft.AspNetCore.Localization;
 
 namespace hello_asp_localization.Installers;
@@ -9,8 +10,10 @@ public static class LocalizationInstaller
     public static List<CultureInfo> SupportedCultures { get; set; } = new()
     {
         new(DefaultCulture),
-        new("fr-FR"),
-        new("de-DE")
+        new CultureInfo("en"),
+        new CultureInfo("de-DE"),
+        new CultureInfo("de-AT"),
+        new CultureInfo("fr-FR"),
     };
 
     public static void InstallLocalization(this IServiceCollection services)
@@ -29,12 +32,12 @@ public static class LocalizationInstaller
             options.FallBackToParentCultures = true;
             options.FallBackToParentUICultures = true;
 
-            options.RequestCultureProviders.Insert(0, new CustomRequestCultureProvider(context =>
+            options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider(async context =>
             {
                 var userLangs = context.Request.Headers["Accept-Language"].ToString();
                 var firstLang = userLangs.Split(',').FirstOrDefault();
                 var defaultLang = string.IsNullOrEmpty(firstLang) ? DefaultCulture : firstLang;
-                return Task.FromResult(new ProviderCultureResult(defaultLang, defaultLang))!;
+                return new ProviderCultureResult(defaultLang, defaultLang);
             }));
         });
 
