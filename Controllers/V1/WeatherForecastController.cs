@@ -11,15 +11,6 @@ public class WeatherForecastController : ControllerBase
 {
     private readonly IStringLocalizer<WeatherResource> _localizer;
 
-    private static readonly string[] Summaries = new[]
-    {
-        "WeatherConstantsFreezing", "WeatherConstantsBracing",
-        "WeatherConstantsChilly", "WeatherConstantsCool",
-        "WeatherConstantsMild", "WeatherConstantsWarm",
-        "WeatherConstantsBalmy", "WeatherConstantsHot",
-        "WeatherConstantsSweltering", "WeatherConstantsScorching"
-    };
-
     private readonly ILogger<WeatherForecastController> _logger;
 
     public WeatherForecastController(
@@ -34,7 +25,6 @@ public class WeatherForecastController : ControllerBase
     [HttpGet(Name = "GetWeatherForecast")]
     public IEnumerable<WeatherForecast> Get()
     {
-        var weatherString = Summaries[Random.Shared.Next(Summaries.Length)];
         var localizerResult = _localizer["WeatherConstantsFreezing"];
         var location = localizerResult.SearchedLocation;
         var localizedString = localizerResult.Value;
