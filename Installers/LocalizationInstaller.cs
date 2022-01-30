@@ -21,7 +21,10 @@ public static class LocalizationInstaller
 
         services.AddLocalization(options =>
         {
-            options.ResourcesPath = "Resources";
+            // not needed since specified in AssemblyInfo.cs
+            // specified there since here assemblyName != rootNamespace and thats currently the
+            // only way to solve it
+            // options.ResourcesPath = "Resources";
         });
 
         services.Configure<RequestLocalizationOptions>(options =>
@@ -31,13 +34,14 @@ public static class LocalizationInstaller
             options.SupportedUICultures = SupportedCultures;
             options.FallBackToParentCultures = true;
             options.FallBackToParentUICultures = true;
+            options.ApplyCurrentCultureToResponseHeaders = true;
 
-            options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider(async context =>
+            options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider(context =>
             {
                 var userLangs = context.Request.Headers["Accept-Language"].ToString();
                 var firstLang = userLangs.Split(',').FirstOrDefault();
                 var defaultLang = string.IsNullOrEmpty(firstLang) ? DefaultCulture : firstLang;
-                return new ProviderCultureResult(defaultLang, defaultLang);
+                return Task.FromResult(new ProviderCultureResult(defaultLang, defaultLang))!;
             }));
         });
 

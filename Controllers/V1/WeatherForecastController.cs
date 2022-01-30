@@ -1,16 +1,15 @@
 using hello_asp_localization.Domain;
+using hello_asp_localization.Localization.Weather;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 
 namespace hello_asp_localization.Controllers.V1;
 
-// namespace test;
-
 [ApiController]
 [Route("[controller]")]
 public class WeatherForecastController : ControllerBase
 {
-    private readonly IStringLocalizer<WeatherForecastController> _localizer;
+    private readonly IStringLocalizer<WeatherResource> _localizer;
 
     private static readonly string[] Summaries = new[]
     {
@@ -24,7 +23,7 @@ public class WeatherForecastController : ControllerBase
     private readonly ILogger<WeatherForecastController> _logger;
 
     public WeatherForecastController(
-        IStringLocalizer<WeatherForecastController> localizer,
+        IStringLocalizer<WeatherResource> localizer,
         ILogger<WeatherForecastController> logger
     )
     {
