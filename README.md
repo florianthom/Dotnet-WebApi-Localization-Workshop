@@ -1,2 +1,2 @@
-# hello-asp_localization
-Small project to show asp-localization features in their practical usage.
+# Dotnet-WebApi-Localization-Workshop
+Asp.net Core Worksop: Localization features and their practical usages.
